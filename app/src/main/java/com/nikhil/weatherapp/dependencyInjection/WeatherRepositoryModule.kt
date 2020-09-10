@@ -1,5 +1,6 @@
 package com.nikhil.weatherapp.dependencyInjection
 
+import com.nikhil.weatherapp.database.WeatherDetailsDao
 import com.nikhil.weatherapp.networkApis.IWeatherApi
 import com.nikhil.weatherapp.repositories.WeatherRepository
 import dagger.Module
@@ -14,8 +15,11 @@ object WeatherRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(iWeatherApi: IWeatherApi): WeatherRepository {
-        return WeatherRepository(iWeatherApi)
+    fun provideWeatherRepository(
+        iWeatherApi: IWeatherApi,
+        weatherDetailsDao: WeatherDetailsDao
+    ): WeatherRepository {
+        return WeatherRepository(iWeatherApi, weatherDetailsDao)
     }
 
 }
