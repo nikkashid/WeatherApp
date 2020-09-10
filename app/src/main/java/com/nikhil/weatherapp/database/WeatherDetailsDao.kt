@@ -9,7 +9,7 @@ import io.reactivex.Single
 interface WeatherDetailsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(weatherDetails: WeatherEntity): Single<Int>
+    fun insert(weatherDetails: WeatherEntity): Single<Long>
 
     @Query("select * from weather_table")
     fun getAllData(): LiveData<List<WeatherEntity>>

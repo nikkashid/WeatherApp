@@ -1,6 +1,7 @@
 package com.nikhil.weatherapp.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.nikhil.weatherapp.BuildConfig
 import com.nikhil.weatherapp.constants.Constants
 import com.nikhil.weatherapp.database.WeatherDetailsDao
@@ -16,8 +17,11 @@ class WeatherRepository @Inject constructor(
     private val weatherApi: IWeatherApi,
     private val weatherDetailDao: WeatherDetailsDao
 ) {
+    private var response: MutableLiveData<Any> = MutableLiveData()
 
     fun getCityWeatherFromNetwork(cityName: String) {
+
+        setResponse(Constants.NETWORK_HIT_INITIATED)
 
         weatherApi.getWeather(
             cityName, BuildConfig.APPID
@@ -25,7 +29,7 @@ class WeatherRepository @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<WeatherResponse>() {
                 override fun onSuccess(t: WeatherResponse) {
-                    setResponse(Constants.SUCCESS_MSG)
+                    insertDataIntoDB(t)
                 }
 
                 override fun onError(e: Throwable) {
@@ -34,8 +38,34 @@ class WeatherRepository @Inject constructor(
             })
     }
 
-    private fun setResponse(serverMsg: String) {
+    private fun insertDataIntoDB(weatherPojo: WeatherResponse) {
 
+        try {
+            var weatherEntity = WeatherEntity()
+            weatherEntity.cityName = weatherPojo.name
+            weatherEntity.weatherDescription = weatherPojo.weather[0].description
+            weatherEntity.temp = weatherPojo.main.temp.toString()
+            weatherEntity.feels_like = weatherPojo.main.feels_like.toString()
+            weatherEntity.tempMin = weatherPojo.main.temp_min.toString()
+            weatherEntity.tempMax = weatherPojo.main.temp_max.toString()
+            weatherEntity.humidity = weatherPojo.main.humidity.toString()
+            weatherEntity.visibility = weatherPojo.visibility.toString()
+            weatherEntity.wind_speed = weatherPojo.wind.speed.toString()
+            weatherEntity.dataEnteredTime = "${System.currentTimeMillis()}"
+            weatherDetailDao.insert(weatherEntity)
+            setResponse(weatherEntity)
+        } catch (e: Exception) {
+
+        }
+
+    }
+
+    private fun setResponse(serverMsg: Any) {
+        response.postValue(serverMsg)
+    }
+
+    fun observerServerResponse(): MutableLiveData<Any> {
+        return response
     }
 
     fun observerDBData(): LiveData<List<WeatherEntity>> {
