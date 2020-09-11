@@ -36,7 +36,7 @@ class WeatherListAdapter(iClickListener: IClickListener) :
         holder.binding.cityAdapterItem = weatherEntity
 
         holder.binding.llMainItem.setOnClickListener(View.OnClickListener {
-            iClickListener.onClickListner(weatherEntity)
+            iClickListener.onClickListener(weatherEntity)
         })
     }
 
@@ -57,7 +57,7 @@ class WeatherListAdapter(iClickListener: IClickListener) :
     }
 
     interface IClickListener {
-        fun onClickListner(weatherEntity: WeatherEntity)
+        fun onClickListener(weatherEntity: WeatherEntity)
     }
 
 }
