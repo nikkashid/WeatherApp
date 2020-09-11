@@ -10,7 +10,7 @@ import com.nikhil.weatherapp.R
 import com.nikhil.weatherapp.databinding.FragmentDetailsBinding
 import com.nikhil.weatherapp.entities.WeatherEntity
 
-class DetailsFragment(private val weatherPojo: WeatherEntity) :
+class DetailsFragment(private val weatherPOJO: WeatherEntity) :
     Fragment(R.layout.fragment_details) {
 
     var detailsFragment: FragmentDetailsBinding? = null
@@ -21,20 +21,28 @@ class DetailsFragment(private val weatherPojo: WeatherEntity) :
         detailsFragment = FragmentDetailsBinding.bind(view)
 
         // Set title bar
-        (activity as AppCompatActivity).supportActionBar?.title = weatherPojo.cityName
+        (activity as AppCompatActivity).supportActionBar?.title = weatherPOJO.cityName
 
-        detailsFragment!!.textViewDescription.text = weatherPojo.weatherDescription.toUpperCase()
+        detailsFragment!!.textViewDescription.text = weatherPOJO.weatherDescription.toUpperCase()
         detailsFragment!!.textViewFeelsLikeTemperature.text =
-            "Feels like ${weatherPojo.feels_like}°C"
-        detailsFragment!!.textViewTemperature.text = "${weatherPojo.temp}°C"
-        detailsFragment!!.textViewVisibility.text = "Visibility: ${weatherPojo.visibility} km"
-        detailsFragment!!.textViewWind.text = "Wind: ${weatherPojo.wind_speed} m/s "
+            "Feels like ${weatherPOJO.feels_like}°C"
+        detailsFragment!!.textViewTemperature.text = "${weatherPOJO.temp}°C"
+        detailsFragment!!.textViewMaxTemp.text = "Max Temp : ${weatherPOJO.tempMax}°C"
+        detailsFragment!!.textViewMinTemp.text = "Min Temp : ${weatherPOJO.tempMin}°C"
+        detailsFragment!!.textViewHumidity.text = "Humidity : ${weatherPOJO.humidity}"
+        detailsFragment!!.textViewVisibility.text = "Visibility: ${weatherPOJO.visibility} km"
+        detailsFragment!!.textViewWind.text = "Wind: ${weatherPOJO.wind_speed} m/s "
         detailsFragment!!.imageViewConditionIcon.setImageDrawable(
             resources.getDrawable(
                 R.drawable.ic_weather_sunny,
                 null
             )
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        detailsFragment = null
     }
 
 }

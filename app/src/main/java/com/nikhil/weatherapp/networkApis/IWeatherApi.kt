@@ -11,7 +11,8 @@ interface IWeatherApi {
     @GET(BuildConfig.WEATHER)
     fun getWeather(
         @Query("q") cityName: String,
-        @Query("appid") appID: String
+        @Query("appid") appID: String,
+        @Query("units") units: String
     ): Single<WeatherResponse>
 
 }

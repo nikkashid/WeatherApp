@@ -10,8 +10,8 @@ import com.nikhil.weatherapp.repositories.WeatherRepository
 class HomeViewModel @ViewModelInject constructor(private val weatherRepository: WeatherRepository) :
     ViewModel() {
 
-    fun getWeather() {
-        weatherRepository.getCityWeatherFromNetwork("Kolhapur")
+    fun getWeather(cityName: String) {
+        weatherRepository.getCityWeatherFromNetwork(cityName)
     }
 
     fun observerServerResponse(): MutableLiveData<Any> {

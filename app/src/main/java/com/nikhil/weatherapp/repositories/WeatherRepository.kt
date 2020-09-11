@@ -1,5 +1,7 @@
 package com.nikhil.weatherapp.repositories
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.nikhil.weatherapp.BuildConfig
@@ -17,14 +19,17 @@ class WeatherRepository @Inject constructor(
     private val weatherApi: IWeatherApi,
     private val weatherDetailDao: WeatherDetailsDao
 ) {
+    private val TAG = "WeatherRepository"
+    
     private var response: MutableLiveData<Any> = MutableLiveData()
 
+    @SuppressLint("CheckResult")
     fun getCityWeatherFromNetwork(cityName: String) {
 
         setResponse(Constants.NETWORK_HIT_INITIATED)
 
         weatherApi.getWeather(
-            cityName, BuildConfig.APPID
+            cityName, BuildConfig.APPID, "metric"
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<WeatherResponse>() {
@@ -55,7 +60,7 @@ class WeatherRepository @Inject constructor(
             weatherDetailDao.insert(weatherEntity)
             setResponse(weatherEntity)
         } catch (e: Exception) {
-
+            Log.e(TAG, "insertDataIntoDB: $e", )
         }
 
     }
