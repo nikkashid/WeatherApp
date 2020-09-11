@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.IClickListener {
         mainActivity.ivSearchCity.setOnClickListener {
             if (mainActivity.etSearchCity.length() > 0) {
                 firstInstance++
+                Constants.hideKeyboard(this)
                 homeViewModel.getWeather(mainActivity.etSearchCity.text.toString())
             } else {
                 Toast.makeText(this, "Please enter city name..", Toast.LENGTH_SHORT).show()
@@ -49,7 +50,6 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.IClickListener {
                 if (firstInstance > 0) {
                     if (response is WeatherEntity) {
                         alertDialog.dismiss()
-                        Constants.hideKeyboard(this)
 
                         val weatherResponse: WeatherEntity = response
 
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.IClickListener {
                             alertDialog.show()
                         } else {
                             alertDialog.dismiss()
-                            Toast.makeText(this, Constants.ERROR_MSG, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, response, Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         alertDialog.dismiss()

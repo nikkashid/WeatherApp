@@ -107,7 +107,11 @@ class WeatherRepository @Inject constructor(
                 }
 
                 override fun onError(e: Throwable) {
-                    setResponse(Constants.ERROR_MSG)
+                    if (e.message.equals(Constants.CITY_NOT_FOUND_RESPONSE)) {
+                        setResponse(Constants.CITY_NOT_FOUND)
+                    } else {
+                        setResponse(Constants.ERROR_MSG)
+                    }
                 }
             })
     }
@@ -117,9 +121,9 @@ class WeatherRepository @Inject constructor(
         try {
             var weatherEntity = WeatherEntity()
             /*Added because name from server sometimes had special char in it
-            eg. Kolhapur used to come as */
+            eg. Kolhapur used to come as Kolhāpur */
             weatherEntity.cityName = cityName.toUpperCase()
-            weatherEntity.weatherDescription = weatherPojo.weather[0].description
+            weatherEntity.weatherDescription = weatherPojo.weather[0].description.toUpperCase()
             weatherEntity.temp = weatherPojo.main.temp.toString()
             weatherEntity.feels_like = weatherPojo.main.feels_like.toString()
             weatherEntity.tempMin = weatherPojo.main.temp_min.toString()

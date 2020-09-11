@@ -8,13 +8,13 @@ import dmax.dialog.SpotsDialog
 
 object Constants {
 
-    const val SUCCESS_MSG = "Data Fetched"
+    const val CITY_NOT_FOUND_RESPONSE = "HTTP 404 Not Found"
 
     const val ERROR_MSG = "Something went wrong"
 
-    const val NETWORK_HIT_INITIATED = "Network Hit Initiated"
+    const val CITY_NOT_FOUND = "City Not Found"
 
-    const val API_ID = ""
+    const val NETWORK_HIT_INITIATED = "Network Hit Initiated"
 
     fun getProgressDialog(context: Context, msg: String): AlertDialog {
 
