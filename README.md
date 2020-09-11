@@ -1,7 +1,7 @@
 # WeatherApp
 Application to search weather details of the entered city.
 Already searched results are shown in the list of home screen.
-Once searched the data of that city will be present in the database and the new data will only be fetched if the existing data is more than 24 hours old.
+Once searched the data of that city will be present in the database and the new data will only be fetched if the existing data is more than 24 hours old(old data will be deleted first).
 
 Technology used in the app :
 1) Kotlin for writing code.
