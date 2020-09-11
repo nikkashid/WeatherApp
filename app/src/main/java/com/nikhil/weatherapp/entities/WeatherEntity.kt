@@ -39,4 +39,26 @@ class WeatherEntity() {
 
     @ColumnInfo(name = "data_entered_time")
     var dataEnteredTime: String = ""
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as WeatherEntity
+
+        if (id != other.id) return false
+        if (cityName != other.cityName) return false
+        if (weatherDescription != other.weatherDescription) return false
+        if (temp != other.temp) return false
+        if (feels_like != other.feels_like) return false
+        if (tempMin != other.tempMin) return false
+        if (tempMax != other.tempMax) return false
+        if (humidity != other.humidity) return false
+        if (visibility != other.visibility) return false
+        if (wind_speed != other.wind_speed) return false
+        if (dataEnteredTime != other.dataEnteredTime) return false
+
+        return true
+    }
+
 }

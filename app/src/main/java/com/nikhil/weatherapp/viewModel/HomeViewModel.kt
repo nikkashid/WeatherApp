@@ -11,7 +11,7 @@ class HomeViewModel @ViewModelInject constructor(private val weatherRepository: 
     ViewModel() {
 
     fun getWeather(cityName: String) {
-        weatherRepository.getCityWeatherFromNetwork(cityName)
+        weatherRepository.getCityWeatherInfo(cityName)
     }
 
     fun observerServerResponse(): MutableLiveData<Any> {

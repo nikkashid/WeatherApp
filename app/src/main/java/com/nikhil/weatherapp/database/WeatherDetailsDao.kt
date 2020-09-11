@@ -20,4 +20,10 @@ interface WeatherDetailsDao {
     @Query("select data_entered_time from weather_table where city_name like :cityName")
     fun getDataEnteredTime(cityName: String): Single<String>
 
+    @Query("select count(city_name) from weather_table")
+    fun getDataCount(): Single<Long>
+
+    @Query("select * FROM weather_table WHERE city_name like :cityName")
+    fun ifCityExists(cityName: String): Single<List<WeatherEntity>>
+
 }
