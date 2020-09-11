@@ -3,4 +3,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="please_wait">Please Wait..</string>
+
+    <string name="city_name">City : %s</string>
+    <string name="current_temp">Current Temperature : %s°C</string>
+    <string name="humidity">Humidity : %s</string>
+    <string name="celsius_symbol">%s°C</string>
+    <string name="feels_like">Feels like %s°C</string>
+    <string name="max_temp">Max Temp : %s°C</string>
+    <string name="min_temp">Min Temp : %s°C</string>
+    <string name="wind">Wind : %s m/s</string>
+    <string name="visibility">Visibility : %s Km</string>
+    <string name="dummy_weather_image">Dummy weather image</string>
+
 </resources>

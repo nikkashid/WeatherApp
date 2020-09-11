@@ -25,12 +25,10 @@ class WeatherRepository @Inject constructor(
     private var response: MutableLiveData<Any> = MutableLiveData()
 
     fun getCityWeatherInfo(cityName: String) {
-        checkDataInDB(cityName)
+        checkDataInDB(cityName.toUpperCase())
     }
 
     private fun checkDataInDB(cityName: String) {
-
-        getDBCountFromDB()
 
         weatherDetailDao.ifCityExists(cityName).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -120,7 +118,7 @@ class WeatherRepository @Inject constructor(
             var weatherEntity = WeatherEntity()
             /*Added because name from server sometimes had special char in it
             eg. Kolhapur used to come as */
-            weatherEntity.cityName = cityName
+            weatherEntity.cityName = cityName.toUpperCase()
             weatherEntity.weatherDescription = weatherPojo.weather[0].description
             weatherEntity.temp = weatherPojo.main.temp.toString()
             weatherEntity.feels_like = weatherPojo.main.feels_like.toString()

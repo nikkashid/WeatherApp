@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity(), WeatherListAdapter.IClickListener {
         }
     }
 
-    override fun onClickListner(weatherEntity: WeatherEntity) {
+    override fun onClickListener(weatherEntity: WeatherEntity) {
         startFragment(weatherEntity)
     }
 }

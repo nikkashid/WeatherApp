@@ -34,22 +34,22 @@
                     android:id="@+id/tv_cityName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{cityAdapterItem.cityName}"
-                    android:textColor="#000000"></TextView>
+                    android:text="@{String.format(@string/city_name, cityAdapterItem.cityName)}"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/tv_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{cityAdapterItem.temp}"
-                    android:textColor="#000000"></TextView>
+                    android:text="@{String.format(@string/current_temp,cityAdapterItem.temp)}"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/tv_humidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{cityAdapterItem.humidity}"
-                    android:textColor="#000000"></TextView>
+                    android:text="@{String.format(@string/humidity,cityAdapterItem.humidity)}"
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
