@@ -11,4 +11,5 @@ Technology used in the app :
 5) DataBinding for fragment as well as recyclerview adapter.
 6) Viewbinding on main screen.
 7) RXJava/RxAndroid for database as well as network operations.
-8) Truth lib for testing(in-progress).
+8) DiffUtil in recyclerView.
+9) Truth lib for testing(in-progress).
