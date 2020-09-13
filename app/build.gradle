@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 30
@@ -61,6 +62,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -100,5 +103,15 @@ dependencies {
 
     //Dialog with spot progress
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+
+    implementation 'org.parceler:parceler-api:1.1.12'
+    kapt 'org.parceler:parceler:1.1.12'
+
+    //Testing
+    testImplementation "com.google.truth:truth:$truth_version"
+    androidTestImplementation "com.google.truth:truth:$truth_android_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$core_ktx_testing_verion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$test_coroutine"
 
 }
