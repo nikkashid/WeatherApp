@@ -26,8 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
 
     private lateinit var alertDialog: AlertDialog
 
-    var firstInstance: Int = 0
-
     lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +40,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
         mainActivity.ivSearchCity.setOnClickListener {
 
             if (mainActivity.etSearchCity.length() > 0) {
-                firstInstance++
                 Constants.hideKeyboard(requireActivity())
                 homeViewModel.getWeather(mainActivity.etSearchCity.text.toString())
             } else {
@@ -56,32 +53,31 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
 
             homeViewModel.observerServerResponse().observe(viewLifecycleOwner,
                 { response ->
-                    if (firstInstance > 0) {
-                        if (response is WeatherEntity) {
-                            alertDialog.dismiss()
+                    if (response is WeatherEntity) {
+                        alertDialog.dismiss()
 
-                            val weatherResponse: WeatherEntity = response
+                        val weatherResponse: WeatherEntity = response
 
-                            startFragment(weatherResponse)
+                        startFragment(weatherResponse)
 
-                        } else if (response is String) {
-                            if (response == Constants.NETWORK_HIT_INITIATED) {
-                                alertDialog.show()
-                            } else {
-                                alertDialog.dismiss()
-                                Toast.makeText(requireContext(), response, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
+                    } else if (response is String) {
+                        if (response == Constants.NETWORK_HIT_INITIATED) {
+                            alertDialog.show()
                         } else {
                             alertDialog.dismiss()
-                            Toast.makeText(
-                                requireContext(),
-                                Constants.ERROR_MSG,
-                                Toast.LENGTH_SHORT
-                            )
+                            Toast.makeText(requireContext(), response, Toast.LENGTH_SHORT)
                                 .show()
                         }
+                    } else {
+                        alertDialog.dismiss()
+                        Toast.makeText(
+                            requireContext(),
+                            Constants.ERROR_MSG,
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
                     }
+
                 })
         }
 
