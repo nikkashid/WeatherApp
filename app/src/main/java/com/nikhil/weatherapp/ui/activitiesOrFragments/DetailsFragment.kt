@@ -6,22 +6,31 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.nikhil.weatherapp.R
 import com.nikhil.weatherapp.databinding.FragmentDetailsBinding
-import com.nikhil.weatherapp.entities.WeatherEntity
 
-class DetailsFragment(private val weatherPOJO: WeatherEntity) :
+class DetailsFragment() :
     Fragment(R.layout.fragment_details) {
 
     private lateinit var detailsFragment: FragmentDetailsBinding
+
+    lateinit var navController: NavController
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         detailsFragment = FragmentDetailsBinding.bind(view)
+        navController = Navigation.findNavController(view)
+
+        val detailsFragmentArgs = arguments?.let { DetailsFragmentArgs.fromBundle(it) }
+        val weatherPOJO = detailsFragmentArgs!!.weather
 
         // Set title bar
-        (activity as AppCompatActivity).supportActionBar?.title = weatherPOJO.cityName
+        if (weatherPOJO != null) {
+            (activity as AppCompatActivity).supportActionBar?.title = weatherPOJO.cityName
+        }
 
         detailsFragment.cityAdapterItem = weatherPOJO
         detailsFragment.imageViewConditionIcon.setImageDrawable(
@@ -30,6 +39,11 @@ class DetailsFragment(private val weatherPOJO: WeatherEntity) :
                 null
             )
         )
+
+        detailsFragment.imageViewConditionIcon.setOnClickListener {
+            navController.navigate(R.id.action_detailsFragment_to_homeFragment);
+        }
+
 //        detailsFragment!!.textViewDescription.text = weatherPOJO.weatherDescription.toUpperCase()
 //        detailsFragment!!.textViewFeelsLikeTemperature.text =
 //            "Feels like ${weatherPOJO.feels_like}°C"

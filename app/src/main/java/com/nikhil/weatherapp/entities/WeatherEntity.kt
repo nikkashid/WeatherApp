@@ -1,11 +1,14 @@
 package com.nikhil.weatherapp.entities
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+
 @Entity(tableName = "weather_table")
-class WeatherEntity() {
+class WeatherEntity() : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
@@ -40,6 +43,20 @@ class WeatherEntity() {
     @ColumnInfo(name = "data_entered_time")
     var dataEnteredTime: String = ""
 
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readInt()
+        cityName = parcel.readString().toString()
+        weatherDescription = parcel.readString().toString()
+        temp = parcel.readString().toString()
+        feels_like = parcel.readString().toString()
+        tempMin = parcel.readString().toString()
+        tempMax = parcel.readString().toString()
+        humidity = parcel.readString().toString()
+        visibility = parcel.readString().toString()
+        wind_speed = parcel.readString().toString()
+        dataEnteredTime = parcel.readString().toString()
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -59,6 +76,24 @@ class WeatherEntity() {
         if (dataEnteredTime != other.dataEnteredTime) return false
 
         return true
+    }
+
+    override fun describeContents(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun writeToParcel(p0: Parcel?, p1: Int) {
+
+    }
+
+    companion object CREATOR : Parcelable.Creator<WeatherEntity> {
+        override fun createFromParcel(parcel: Parcel): WeatherEntity {
+            return WeatherEntity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<WeatherEntity?> {
+            return arrayOfNulls(size)
+        }
     }
 
 }
