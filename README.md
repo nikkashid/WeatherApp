@@ -12,4 +12,5 @@ Technology used in the app :
 6) Viewbinding on main screen.
 7) RXJava/RxAndroid for database as well as network operations.
 8) DiffUtil in recyclerView.
-9) Truth lib for testing(in-progress).
+9) Navigation component for fragment navigation.
+10) Truth lib for testing(in-progress).
