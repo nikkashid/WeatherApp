@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.nikhil.weatherapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
