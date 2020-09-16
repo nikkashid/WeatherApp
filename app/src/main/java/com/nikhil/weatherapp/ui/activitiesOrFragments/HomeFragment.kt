@@ -28,6 +28,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
 
     lateinit var navController: NavController
 
+    var isButtonClicked = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,6 +44,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
             if (mainActivity.etSearchCity.length() > 0) {
                 Constants.hideKeyboard(requireActivity())
                 homeViewModel.getWeather(mainActivity.etSearchCity.text.toString())
+                isButtonClicked = true
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -50,9 +53,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
                 )
                     .show()
             }
+        }
 
-            homeViewModel.observerServerResponse().observe(viewLifecycleOwner,
-                { response ->
+        homeViewModel.observerServerResponse().observe(viewLifecycleOwner,
+            { response ->
+                if (isButtonClicked) {
                     if (response is WeatherEntity) {
                         alertDialog.dismiss()
 
@@ -77,9 +82,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
                         )
                             .show()
                     }
-
-                })
-        }
+                }
+            })
 
         homeViewModel.observerDBData().observe(viewLifecycleOwner, { response ->
             setUpAdapter(response)
@@ -93,10 +97,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
     }
 
     private fun startFragment(weatherResponse: WeatherEntity) {
-
+        isButtonClicked = false
         var action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(weatherResponse)
         navController.navigate(action)
-
     }
 
     private fun setUpAdapter(listOfWeathers: List<WeatherEntity>) {

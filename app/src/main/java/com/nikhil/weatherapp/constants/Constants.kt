@@ -16,6 +16,8 @@ object Constants {
 
     const val NETWORK_HIT_INITIATED = "Network Hit Initiated"
 
+    const val WEATHER_UNIT = "metric"
+
     fun getProgressDialog(context: Context, msg: String): AlertDialog {
 
         return SpotsDialog.Builder()

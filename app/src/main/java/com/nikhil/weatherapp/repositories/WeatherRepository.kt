@@ -98,7 +98,7 @@ class WeatherRepository @Inject constructor(
         setResponse(Constants.NETWORK_HIT_INITIATED)
 
         weatherApi.getWeather(
-            cityName, BuildConfig.APPID, "metric"
+            cityName, BuildConfig.APPID, Constants.WEATHER_UNIT
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<WeatherResponse>() {
