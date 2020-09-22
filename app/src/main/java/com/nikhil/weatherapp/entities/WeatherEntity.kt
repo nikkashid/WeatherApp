@@ -6,42 +6,42 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "weather_table")
-class WeatherEntity() : Parcelable {
-
+data class WeatherEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Int = 0,
 
     @ColumnInfo(name = "city_name")
-    var cityName: String = ""
+    var cityName: String = "",
 
     @ColumnInfo(name = "weather_description")
-    var weatherDescription: String = ""
+    var weatherDescription: String = "",
 
     @ColumnInfo(name = "temp")
-    var temp: String = ""
+    var temp: String = "",
 
     @ColumnInfo(name = "feels_like")
-    var feels_like: String = ""
+    var feels_like: String = "",
 
     @ColumnInfo(name = "temp_min")
-    var tempMin: String = ""
+    var tempMin: String = "",
 
     @ColumnInfo(name = "temp_max")
-    var tempMax: String = ""
+    var tempMax: String = "",
 
     @ColumnInfo(name = "humidity")
-    var humidity: String = ""
+    var humidity: String = "",
 
     @ColumnInfo(name = "visibility")
-    var visibility: String = ""
+    var visibility: String = "",
 
     @ColumnInfo(name = "wind_speed")
-    var wind_speed: String = ""
+    var wind_speed: String = "",
 
     @ColumnInfo(name = "data_entered_time")
     var dataEnteredTime: String = ""
+) : Parcelable {
+
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readInt()
@@ -83,7 +83,7 @@ class WeatherEntity() : Parcelable {
     }
 
     override fun writeToParcel(p0: Parcel?, p1: Int) {
-
+        //Written because of forcefull implementing
     }
 
     companion object CREATOR : Parcelable.Creator<WeatherEntity> {
