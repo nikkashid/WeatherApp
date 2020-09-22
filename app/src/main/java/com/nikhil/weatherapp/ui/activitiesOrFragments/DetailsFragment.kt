@@ -44,21 +44,6 @@ class DetailsFragment() :
             navController.navigate(R.id.action_detailsFragment_to_homeFragment);
         }
 
-//        detailsFragment!!.textViewDescription.text = weatherPOJO.weatherDescription.toUpperCase()
-//        detailsFragment!!.textViewFeelsLikeTemperature.text =
-//            "Feels like ${weatherPOJO.feels_like}°C"
-//        detailsFragment!!.textViewTemperature.text = "${weatherPOJO.temp}°C"
-//        detailsFragment!!.textViewMaxTemp.text = "Max Temp : ${weatherPOJO.tempMax}°C"
-//        detailsFragment!!.textViewMinTemp.text = "Min Temp : ${weatherPOJO.tempMin}°C"
-//        detailsFragment!!.textViewHumidity.text = "Humidity : ${weatherPOJO.humidity}"
-//        detailsFragment!!.textViewVisibility.text = "Visibility: ${weatherPOJO.visibility} km"
-//        detailsFragment!!.textViewWind.text = "Wind: ${weatherPOJO.wind_speed} m/s "
-//        detailsFragment!!.imageViewConditionIcon.setImageDrawable(
-//            resources.getDrawable(
-//                R.drawable.ic_weather_sunny,
-//                null
-//            )
-//        )
     }
 
 }
