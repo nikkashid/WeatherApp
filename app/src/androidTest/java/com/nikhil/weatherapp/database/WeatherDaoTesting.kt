@@ -45,7 +45,7 @@ class WeatherDaoTesting {
     @Test
     fun insertWeatherData() = runBlockingTest {
 
-        var weatherEntity = WeatherEntity()
+        val weatherEntity = WeatherEntity()
         weatherEntity.cityName = "Kolhapur"
         weatherEntity.weatherDescription = "Cloudy"
         weatherEntity.temp = "25.34"
@@ -66,7 +66,7 @@ class WeatherDaoTesting {
 
     @Test
     fun deleteWeatherDao() = runBlockingTest {
-        var weatherEntity = WeatherEntity()
+        val weatherEntity = WeatherEntity()
         weatherEntity.cityName = "Kolhapur"
         weatherEntity.weatherDescription = "Cloudy"
         weatherEntity.temp = "25.34"
@@ -83,6 +83,34 @@ class WeatherDaoTesting {
         val completeWeatherInfo = weatherDetailsDao.getAllData().getOrAwaitValue()
 
         assertThat(completeWeatherInfo).doesNotContain(weatherEntity)
+    }
+
+    @Test
+    fun getDataCount() = runBlockingTest {
+
+        for (i in 1..2) {
+            val weatherEntity = WeatherEntity(
+                i,
+                "Kolhapur",
+                "Cloudy",
+                "25.34",
+                "25.34",
+                "25.34",
+                "25.34",
+                "90",
+                "10000",
+                "3.14",
+                "${System.currentTimeMillis()}"
+            )
+
+            weatherDetailsDao.insert(weatherEntity)
+        }
+
+        val completeWeatherInfo = weatherDetailsDao.getAllData().getOrAwaitValue()
+        val dbCount = weatherDetailsDao.getDataCount()
+
+        assertThat(completeWeatherInfo.size).isEqualTo(dbCount)
+
     }
 
 }
