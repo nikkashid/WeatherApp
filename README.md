@@ -14,3 +14,4 @@ Technology used in the app :
 8) DiffUtil in recyclerView.
 9) Navigation component for fragment navigation.
 10) Truth lib for testing(in-progress).
+11) Monitoring app crashes with Firebase Crashlytics.

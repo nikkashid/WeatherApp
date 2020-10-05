@@ -38,4 +38,13 @@
         android:layout_marginTop="10dp"
         tools:listitem="@layout/city_weather_item"></androidx.recyclerview.widget.RecyclerView>
 
+    <!--<Button
+        android:id="@+id/btn_crash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:text="@string/force_crash_the_app" />-->
+
 </RelativeLayout>

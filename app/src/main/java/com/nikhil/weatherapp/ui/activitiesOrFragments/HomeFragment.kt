@@ -19,7 +19,7 @@ import com.nikhil.weatherapp.viewModel.HomeViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClickListener {
 
-    private lateinit var mainActivity: FragmentHomeBinding
+    private lateinit var homeFragment: FragmentHomeBinding
 
     //Hilt ViewModel Injection
     private val homeViewModel: HomeViewModel by activityViewModels<HomeViewModel>()
@@ -33,17 +33,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainActivity = FragmentHomeBinding.bind(view)
+        homeFragment = FragmentHomeBinding.bind(view)
 
         navController = Navigation.findNavController(view)
 
         alertDialog = Constants.getProgressDialog(requireContext(), getString(R.string.please_wait))
 
-        mainActivity.ivSearchCity.setOnClickListener {
+        homeFragment.ivSearchCity.setOnClickListener {
 
-            if (mainActivity.etSearchCity.length() > 0) {
+            if (homeFragment.etSearchCity.length() > 0) {
                 Constants.hideKeyboard(requireActivity())
-                homeViewModel.getWeather(mainActivity.etSearchCity.text.toString())
+                homeViewModel.getWeather(homeFragment.etSearchCity.text.toString())
                 isButtonClicked = true
             } else {
                 Toast.makeText(
@@ -89,6 +89,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
             setUpAdapter(response)
         })
 
+//        homeFragment.btnCrash.setOnClickListener {
+//            throw RuntimeException("Test Crash");
+//        }
+
     }
 
     override fun onResume() {
@@ -105,9 +109,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), WeatherListAdapter.IClick
     private fun setUpAdapter(listOfWeathers: List<WeatherEntity>) {
         if (listOfWeathers.isNotEmpty()) {
             val weatherListAdapter = WeatherListAdapter(this)
-            mainActivity.rvSearchData.layoutManager = LinearLayoutManager(requireContext())
-            mainActivity.rvSearchData.hasFixedSize()
-            mainActivity.rvSearchData.adapter = weatherListAdapter
+            homeFragment.rvSearchData.layoutManager = LinearLayoutManager(requireContext())
+            homeFragment.rvSearchData.hasFixedSize()
+            homeFragment.rvSearchData.adapter = weatherListAdapter
             weatherListAdapter.submitList(listOfWeathers)
         }
     }
